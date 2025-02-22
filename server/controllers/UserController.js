@@ -20,7 +20,7 @@ const clerkWebhooks = async (req, res) => {
       case "user.created": {
         const userData = {
           clerkID: data.id,
-          email: data.email_addresses[0].email_address, 
+          email: data.email_addresses[0].email_address,
           firstName: data.first_name,
           lastName: data.last_name,
           photo: data.image_url,
@@ -57,4 +57,19 @@ const clerkWebhooks = async (req, res) => {
   }
 };
 
-export { clerkWebhooks };
+//API controller function to get user availabe credit data
+
+const userCredits = async (req, res) => {
+  try {
+    const { clerkID } = req.body;
+    const userData = await userModel.findOne({ clerkID });
+
+    console.log(userData);
+    res.json({ success: true, credits: userData.creditBalance });
+  } catch (error) {
+    console.log(error.message);
+    res.json({ sucess: false, message: error.message });
+  }
+};
+
+export { clerkWebhooks, userCredits };

@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
   lastName: {
     type: String,
   },
-  crditBalance: {
+  creditBalance: {
     type: Number,
     default: 5,
   },
