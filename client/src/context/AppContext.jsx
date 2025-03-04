@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
-  const { credit, setCredit } = useState(0);
+  const [credit, setCredit] = useState(false);
 
   const beckendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -21,7 +21,7 @@ const AppContextProvider = (props) => {
       });
       if (data.success) {
         setCredit(data.credits);
-        console.log(data.credit);
+        console.log(data.credits);
       }
     } catch (error) {
       console.log(error);

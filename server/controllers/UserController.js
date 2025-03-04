@@ -1,5 +1,6 @@
 import { EnvironmentOut, Webhook } from "svix";
 import userModel from "../models/userModel.js";
+import userRouter from "../routes/userRoutes.js";
 // ApI controller function to manage clerk user with database
 //http://localhost:4000/api/user/webhooks
 
@@ -63,8 +64,7 @@ const userCredits = async (req, res) => {
   try {
     const { clerkID } = req.body;
     const userData = await userModel.findOne({ clerkID });
-
-    console.log(userData);
+    console.log(clerkID);
     res.json({ success: true, credits: userData.creditBalance });
   } catch (error) {
     console.log(error.message);
