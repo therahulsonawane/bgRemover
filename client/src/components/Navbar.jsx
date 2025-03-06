@@ -27,7 +27,9 @@ function Navbar() {
               Credits: {credit !== null ? credit : 0}
             </p>
           </button>
-          <p className="text-gray-600 max-sm:hidden">Hi, {user.fullName}</p>
+          <p className="text-gray-600 max-sm:hidden">
+            Hi, {user.fullName}
+          </p>
           <UserButton />
         </div>
       ) : (

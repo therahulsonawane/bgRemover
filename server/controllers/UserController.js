@@ -1,6 +1,5 @@
 import { EnvironmentOut, Webhook } from "svix";
 import userModel from "../models/userModel.js";
-import userRouter from "../routes/userRoutes.js";
 // ApI controller function to manage clerk user with database
 //http://localhost:4000/api/user/webhooks
 
@@ -27,6 +26,7 @@ const clerkWebhooks = async (req, res) => {
           photo: data.image_url,
         };
         await userModel.create(userData);
+        console.log(userData);
         res.JSON({});
         break;
       }
