@@ -1,4 +1,4 @@
-import { EnvironmentOut, Webhook } from "svix";
+import { Webhook } from "svix";
 import userModel from "../models/userModel.js";
 // ApI controller function to manage clerk user with database
 //http://localhost:4000/api/user/webhooks
@@ -19,14 +19,13 @@ const clerkWebhooks = async (req, res) => {
     switch (type) {
       case "user.created": {
         const userData = {
-          clerkID: data.id,
+          clerkId: data.id,
           email: data.email_addresses[0].email_address,
           firstName: data.first_name,
           lastName: data.last_name,
           photo: data.image_url,
         };
         await userModel.create(userData);
-        console.log(userData);
         res.JSON({});
         break;
       }
@@ -39,13 +38,13 @@ const clerkWebhooks = async (req, res) => {
           photo: data.image_url,
         };
 
-        await userModel.findOneAndUpdate({ clerkID: data.id }, userData);
-        res.JSON({});
+        await userModel.findOneAndUpdate({ clerkId: data.id }, userData);
+        res.json({});
         break;
       }
       case "user.deleted": {
-        await userModel.findOneAndDelete({ clerkID: data.id });
-        res.JSON({});
+        await userModel.findOneAndDelete({ clerkId: data.id });
+        res.json({});
         break;
       }
 
@@ -54,7 +53,7 @@ const clerkWebhooks = async (req, res) => {
     }
   } catch (error) {
     console.log(error.message);
-    res.JSON({ sucess: false, message: error.message });
+    res.JSON({ success: false, message: error.message });
   }
 };
 
@@ -62,9 +61,9 @@ const clerkWebhooks = async (req, res) => {
 
 const userCredits = async (req, res) => {
   try {
-    const { clerkID } = req.body;
-    const userData = await userModel.findOne({ clerkID });
-    console.log(clerkID);
+    const { clerkId } = req.body;
+    const userData = await userModel.findOne({ clerkId });
+    console.log(clerkId);
     res.json({ success: true, credits: userData.creditBalance });
   } catch (error) {
     console.log(error.message);
