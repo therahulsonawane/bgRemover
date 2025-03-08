@@ -7,13 +7,15 @@ import { AppContext } from "../context/AppContext.jsx";
 function Navbar() {
   const { openSignIn } = useClerk();
   const { isSignedIn, user } = useUser();
-  const { credit, loadCreditData } = useContext(AppContext);
+  const { credit, loadCreditsData } = useContext(AppContext);
 
   useEffect(() => {
     if (isSignedIn) {
-      loadCreditData();
+      loadCreditsData();
     }
   }, [isSignedIn]);
+
+  
   return (
     <div className="flex items-center justify-between mx-4 py-3 lg:mx-44">
       <Link to="/">
@@ -27,9 +29,7 @@ function Navbar() {
               Credits: {credit !== null ? credit : 0}
             </p>
           </button>
-          <p className="text-gray-600 max-sm:hidden">
-            Hi, {user.fullName}
-          </p>
+          <p className="text-gray-600 max-sm:hidden">Hi, {user.fullName}</p>
           <UserButton />
         </div>
       ) : (
