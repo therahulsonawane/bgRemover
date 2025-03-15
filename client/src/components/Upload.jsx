@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext.jsx";
 
-function Upload() {
+const Upload = () => {
   const { removeBg } = useContext(AppContext);
   return (
     <div className="pb-16">
@@ -27,6 +27,6 @@ function Upload() {
       </div>
     </div>
   );
-}
+};
 
 export default Upload;
